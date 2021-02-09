@@ -19,12 +19,12 @@ services:
       MINIO_REGION_NAME: meddler
 
   # #8082
-  # log_reader:
-  #   extends:
-  #     file: ./log_reader/docker-compose.yaml
-  #     service: log_reader
-  #   volumes:
-  #     - ./volumes/build_logs:/log:ro
+  log_reader:
+    extends:
+      file: ./log_reader/docker-compose.yaml
+      service: log_reader
+    volumes:
+      - ./volumes/build_logs:/log:ro
 
 
 
