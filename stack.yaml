@@ -3,41 +3,44 @@ services:
   #TCP: 24224
   fluentd:
     extends:
-      file: ./stack/fluentd/docker-compose.yaml
+      file: ./fluentd/docker-compose.yaml
       service: fluentd
+    volumes:
+      - /volumes/fluentd:/logs:Z
+
 
   #TCP: 24224
   minio:
     extends:
-      file: ./stack/minio/docker-compose.yml
+      file: ./minio/docker-compose.yml
       service: minio
     volumes:
-      - ./volumes/minio/data:/data
+      - /volumes/minio/data:/data
     environment:
       MINIO_ACCESS_KEY: MEDDLER
       MINIO_SECRET_KEY: SUPERDUPERSECRET
       MINIO_REGION_NAME: meddler
 
-  #8082
+  # #8082
   log_reader:
     extends:
-      file: ./modules/log_reader/docker-compose.yaml
+      file: ./log_reader/docker-compose.yaml
       service: log_reader
     volumes:
-      - ./volumes/build_logs:/log:ro
+      - /volumes/build_logs:/log:ro
 
 
 
   rabbitmq:
     extends:
-      file: ./stack/rabbitmq/docker-compose.yml
+      file: ./rabbitmq/docker-compose.yml
       service: rabbitmq
     volumes:
-      - ./volumes/rmq:/bitnami
+      - /volumes/rmq:/bitnami
 
   registry:
     extends:
-      file: ./stack/registry/docker-compose.yaml
+      file: ./registry/docker-compose.yaml
       service: registry
 
 
