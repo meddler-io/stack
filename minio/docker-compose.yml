@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  minio:
+    image: 'minio/minio'
+    command: server /data
+    volumes:
+      - ./data:/data
+    environment:
+      MINIO_ACCESS_KEY: MEDDLER
+      MINIO_SECRET_KEY: SUPERDUPERSECRET
+    ports:
+      - '9000:9000'
+    expose:
+      - 9000
+

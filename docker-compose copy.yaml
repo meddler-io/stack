@@ -1,0 +1,81 @@
+version: "3"
+services:
+  #TCP: 24224
+  fluentd:
+    extends:
+      file: ./stack/docker-compose.yaml
+      service: fluentd
+
+  #TCP: 24224
+  minio:
+    extends:
+      file: ./stack/minio/docker-compose.yml
+      service: minio
+    volumes:
+      - ./volumes/minio/data:/data
+    environment:
+      MINIO_ACCESS_KEY: MEDDLER
+      MINIO_SECRET_KEY: SUPERDUPERSECRET
+      MINIO_REGION_NAME: meddler
+
+  #8082
+  log_reader:
+    extends:
+      file: ./modules/log_reader/docker-compose.yaml
+      service: log_reader
+    volumes:
+      - ./volumes/build_logs:/log:ro
+
+  # Watchdog Test
+  # watchdog_test:
+  #   extends:
+  #     file: ./modules/watchdog/docker-compose.yaml
+  #     service: watchdog_test
+  #   command: go run main.go
+  #   environment:
+  #     MINIOURL: minio:9000
+  #     BASEPATH: /opt/secoflex
+  #     INPUTDIR: /input
+  #     OUTPUTDIR: /output
+  #   scale: 1
+
+
+  rabbitmq:
+    extends:
+      file: ./stack/rabbitmq/docker-compose.yml
+      service: rabbitmq
+    volumes:
+      - ./volumes/rmq:/bitnami
+
+  registry:
+    extends:
+      file: ./stack/registry/docker-compose.yaml
+      service: registry
+
+
+# Tools
+  docker_builder:
+    image: rounak316/tool_builder:0.0.1
+    environment:
+      MINIOURL: minio:9000
+      BASEPATH: /opt/secoflex
+      INPUTDIR: /input
+      exec_timeout: 1000
+      OUTPUTDIR: /output
+      fluent_host: fluentd
+      fluent_port: 24224
+      RMQ_HOST: rabbitmq
+
+# Tools
+  mobsf:
+    image: localhost:5000/rouna311/mobsh:custom
+    environment:
+      MINIOURL: minio:9000
+      BASEPATH: /opt/secoflex
+      INPUTDIR: /input
+      exec_timeout: 5
+      OUTPUTDIR: /output
+      fluent_host: fluentd
+      fluent_port: 24224
+      RMQ_HOST: rabbitmq
+
