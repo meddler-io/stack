@@ -27,7 +27,7 @@ services:
       file: ./log_reader/docker-compose.yaml
       service: log_reader
     volumes:
-      - /volumes/build_logs:/log:ro
+      - /volumes/fluentd:/log:ro
 
 
 
@@ -42,3 +42,9 @@ services:
     extends:
       file: ./registry/docker-compose.yaml
       service: registry
+
+
+  db:
+    extends:
+      file: ./db/docker-compose.yaml
+      service: db
