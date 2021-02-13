@@ -1,0 +1,7 @@
+{
+	"auths": {
+		"http://registry:5000/v1/": {
+			"auth": "YWRtaW46YWRtaW4="
+		}
+	}
+}

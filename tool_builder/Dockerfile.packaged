@@ -1,0 +1,8 @@
+FROM rounak316/watchdog:builder as builder
+USER root
+
+FROM gcr.io/kaniko-project/executor:latest
+COPY --from=builder   /usr/bin/watchdog/of-watchdog /kaniko/watchdog
+# COPY ./test /workspace/
+ENTRYPOINT [ "/kaniko/watchdog" ]
+

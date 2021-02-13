@@ -1,0 +1,13 @@
+version: '3'
+services:
+  test:
+    image: gcr.io/kaniko-project/executor:latest
+    command: --context=git://github.com/studiogangster/log-streamer --no-push
+
+
+  tool_builder:
+    env_file: .env
+    container_name: tool_builder
+    build: .
+    volumes:
+      - ./test:/test

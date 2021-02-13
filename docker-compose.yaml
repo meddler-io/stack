@@ -8,7 +8,6 @@ services:
     volumes:
       - /volumes/fluentd:/logs:Z
 
-
   #TCP: 24224
   minio:
     extends:
@@ -29,8 +28,6 @@ services:
     volumes:
       - /volumes/fluentd:/log:ro
 
-
-
   rabbitmq:
     extends:
       file: ./rabbitmq/docker-compose.yml
@@ -43,8 +40,13 @@ services:
       file: ./registry/docker-compose.yaml
       service: registry
 
-
   db:
     extends:
       file: ./db/docker-compose.yaml
       service: db
+
+  # Tools on top of watchdog bootstrapper
+  tool_builder:
+    extends:
+      file: ./tool_builder/docker-compose.yml
+      service: tool_builder
