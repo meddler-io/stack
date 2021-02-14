@@ -6,5 +6,14 @@ services:
       - 5000
     ports:
       - 5000:5000
+    environment:
+      REGISTRY_STORAGE: s3
+      REGISTRY_STORAGE_S3_ACCESSKEY: MEDDLER
+      REGISTRY_STORAGE_S3_SECRETKEY: SUPERDUPERSECRET
+      REGISTRY_STORAGE_S3_REGIONENDPOINT: http://192.168.29.9:9000
+      REGISTRY_STORAGE_S3_BUCKET: docker
+      REGISTRY_STORAGE_S3_SECURE: "false"
+      REGISTRY_STORAGE_S3_region: ignored-for-minio
+      REGISTRY_STORAGE_REDIRECT_DISABLE: "true"
     # volumes:
       # - ./config.yml:/etc/docker/registry/config.yml
