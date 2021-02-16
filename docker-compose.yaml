@@ -49,6 +49,8 @@ services:
     extends:
       file: ./db/docker-compose.yaml
       service: db
+    volumes:
+      - /volumes/mongodb:/data/db
     restart: always
 
   # Tools on top of watchdog bootstrapper
