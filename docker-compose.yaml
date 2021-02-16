@@ -40,10 +40,10 @@ services:
       file: ./registry/docker-compose.yaml
       service: registry
 
-  # db:
-  #   extends:
-  #     file: ./db/docker-compose.yaml
-  #     service: db
+  db:
+    extends:
+      file: ./db/docker-compose.yaml
+      service: db
 
   # Tools on top of watchdog bootstrapper
   tool_builder:

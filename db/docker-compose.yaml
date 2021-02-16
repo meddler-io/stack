@@ -1,8 +1,9 @@
-version: "3"
+version: '3'
 services:
-  db:
+  mongo:
     image: mongo
-    env_file:
-      - .env
+    command:  ["--replSet", "rs0", "--bind_ip_all"] #  --config /etc/mongo/mongod.conf
+    volumes:
+      - ./mongo.conf:/etc/mongo/mongod.conf
     ports:
       - 27017:27017
