@@ -7,6 +7,7 @@ services:
       service: fluentd
     volumes:
       - /volumes/fluentd:/logs:Z
+    restart: always
 
   #TCP: 24224
   minio:
@@ -19,6 +20,7 @@ services:
       MINIO_ACCESS_KEY: MEDDLER
       MINIO_SECRET_KEY: SUPERDUPERSECRET
       MINIO_REGION_NAME: meddler
+    restart: always
 
   # #8082
   log_reader:
@@ -27,6 +29,7 @@ services:
       service: log_reader
     volumes:
       - /volumes/fluentd:/log:ro
+    restart: always
 
   rabbitmq:
     extends:
@@ -34,19 +37,23 @@ services:
       service: rabbitmq
     volumes:
       - /volumes/rmq:/bitnami:Z
+    restart: always
 
   registry:
     extends:
       file: ./registry/docker-compose.yaml
       service: registry
+    restart: always
 
   db:
     extends:
       file: ./db/docker-compose.yaml
       service: db
+    restart: always
 
   # Tools on top of watchdog bootstrapper
   tool_builder:
     extends:
       file: ./tool_builder/docker-compose.yml
       service: tool_builder
+    restart: always
