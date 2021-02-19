@@ -7,6 +7,7 @@ services:
   tool_builder:
     env_file: .env
     container_name: tool_builder
-    image: rounak316/tool_builder:0.0.1
+    # image: rounak316/tool_builder:0.0.1
+    image: rounak316/tool_builder:debug
     volumes:
       - ./test:/test

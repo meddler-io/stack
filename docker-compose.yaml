@@ -20,6 +20,8 @@ services:
       MINIO_ACCESS_KEY: MEDDLER
       MINIO_SECRET_KEY: SUPERDUPERSECRET
       MINIO_REGION_NAME: meddler
+      MINIO_COMPRESS: on
+      MINIO_COMPRESS_EXTENSIONS=: .txt,.log,.csv,.json,.tar,.xml,.bin"
     restart: always
 
   # #8082
