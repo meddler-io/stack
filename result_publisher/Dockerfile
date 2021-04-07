@@ -1,5 +1,5 @@
 FROM scratch
 
-COPY ./executable /opt/log_reader
+COPY ./executable /opt/executable
 
 ENTRYPOINT [ "/opt/executable" ]
