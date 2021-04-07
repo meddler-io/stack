@@ -61,3 +61,14 @@ services:
       file: ./tool_builder/docker-compose.yml
       service: tool_builder
     restart: always
+
+      # Tools on top of watchdog bootstrapper
+  tool_publisher:
+    extends:
+      file: ./task_result_publisher/docker-compose.yml
+      service: tool_publisher
+    environment:
+      MONGO_HOST: db
+      RMQ_HOST: rabbitmq
+    restart: always
+
