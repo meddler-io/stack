@@ -65,7 +65,7 @@ services:
       # Tools on top of watchdog bootstrapper
   tool_publisher:
     extends:
-      file: ./task_result_publisher/docker-compose.yml
+      file: ./result_publisher/docker-compose.yml
       service: tool_publisher
     environment:
       MONGO_HOST: db
