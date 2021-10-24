@@ -10,10 +10,11 @@ services:
       REGISTRY_STORAGE: s3
       REGISTRY_STORAGE_S3_ACCESSKEY: MEDDLER
       REGISTRY_STORAGE_S3_SECRETKEY: SUPERDUPERSECRET
-      REGISTRY_STORAGE_S3_REGIONENDPOINT: http://192.168.29.5:9000
+      REGISTRY_STORAGE_S3_REGIONENDPOINT: http://minio:9000
       REGISTRY_STORAGE_S3_BUCKET: docker
       REGISTRY_STORAGE_S3_SECURE: "false"
       REGISTRY_STORAGE_S3_region: meddler
       REGISTRY_STORAGE_REDIRECT_DISABLE: "true"
-    # volumes:
-      # - ./config.yml:/etc/docker/registry/config.yml
+      # REGISTRY_HTTP_SECRET: SUPERDUPERSECRET
+    volumes:
+      - ./config.yml:/etc/docker/registry/config.yml

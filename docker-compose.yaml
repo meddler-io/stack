@@ -1,21 +1,25 @@
 version: "3"
 services:
   #TCP: 24224
+
+
   fluentd:
+    container_name: fluentd
     extends:
       file: ./fluentd/docker-compose.yaml
       service: fluentd
     volumes:
-      - /volumes/fluentd:/logs:Z
+      - ./volumes/fluentd:/logs:Z
     restart: always
 
   #TCP: 24224
   minio:
+    container_name: minio
     extends:
       file: ./minio/docker-compose.yml
       service: minio
     volumes:
-      - /volumes/minio/data:/data
+      - ./volumes/minio/data:/data
     environment:
       MINIO_ACCESS_KEY: MEDDLER
       MINIO_SECRET_KEY: SUPERDUPERSECRET
@@ -30,45 +34,70 @@ services:
       file: ./log_reader/docker-compose.yaml
       service: log_reader
     volumes:
-      - /volumes/fluentd:/log:ro
+      - ./volumes/fluentd:/log:ro
     restart: always
 
   rabbitmq:
+    container_name: rabbitmq
     extends:
       file: ./rabbitmq/docker-compose.yml
       service: rabbitmq
     volumes:
-      - /volumes/rmq:/bitnami:Z
+      - ./volumes/rmq:/bitnami:Z
     restart: always
 
   registry:
+    container_name: registry
     extends:
       file: ./registry/docker-compose.yaml
       service: registry
     restart: always
 
   db:
+    container_name: database
     extends:
       file: ./db/docker-compose.yaml
       service: db
     volumes:
-      - /volumes/mongodb:/data/db
+      - ./volumes/mongodb:/data/db
     restart: always
 
   # Tools on top of watchdog bootstrapper
   tool_builder:
+    container_name: tool_builder
     extends:
       file: ./tool_builder/docker-compose.yml
       service: tool_builder
     restart: always
 
-      # Tools on top of watchdog bootstrapper
+    # Tools on top of watchdog bootstrapper
   tool_publisher:
+    container_name: tool_publisher
     extends:
       file: ./result_publisher/docker-compose.yaml
-      service: tool_publisher
+      service: publisher
     environment:
-      MONGO_HOST: db
-      RMQ_HOST: rabbitmq
+      - MONGO_HOST=db
+      - MONGO_DB=fastapi
+      - RMQ_HOST=rabbitmq
+      - MONGO_COLL=builds_executor
+      - RMQ_USERNAME=user
+      - RMQ_PASSWORD=bitnami
+      - message_queue_topic=build_publish
+    restart: always
+
+  job_publisher:
+    container_name: job_publisher
+    extends:
+      file: ./result_publisher/docker-compose.yaml
+      service: publisher
+    environment:
+      - MONGO_HOST=db
+      - MONGO_DB=fastapi
+      - RMQ_HOST=rabbitmq
+      - MONGO_COLL=jobs
+      - RMQ_USERNAME=user
+      - RMQ_PASSWORD=bitnami
+      - message_queue_topic=tasks_publish
     restart: always
 

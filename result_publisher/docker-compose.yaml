@@ -1,15 +1,13 @@
 version: '3'
 services:
-  tool_publisher:
+  publisher:
     build: .
     environment:
-      - MONGO_HOST=192.168.29.5
+      - MONGO_HOST=db
       - MONGO_DB=fastapi
-      - MONGO_COLL=jobs
-      - MONGO_COLL_BUILD=builds_executor
-
+      - RMQ_HOST=rabbitmq
       - RMQ_USERNAME=user
       - RMQ_PASSWORD=bitnami
-      - RMQ_HOST=192.168.29.5
-      - publish_message_queue_topic=tasks_publish
-      - publish_build_message_queue_topic=build_publish
+      - message_queue_topic=publish_message_queue_topic
+
+

@@ -1,1 +1,1 @@
-export NOMAD_ADDR=http://192.168.29.5:4646
+export NOMAD_ADDR=http://192.168.29.185:4646

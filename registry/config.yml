@@ -33,6 +33,7 @@ storage:
       enabled: false
 http:
   addr: :5000
+  secret: SUPERDUPERSECRET
   headers:
     X-Content-Type-Options: [nosniff]
 

@@ -1,5 +1,5 @@
 FROM scratch
 
-COPY ./executable /opt/executable
+COPY ./result-publisher /opt/executable
 
 ENTRYPOINT [ "/opt/executable" ]

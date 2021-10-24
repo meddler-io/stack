@@ -13,17 +13,17 @@ job "restart" {
         env {
           RMQ_USERNAME = "user"
           RMQ_PASSWORD = "bitnami"
-          RMQ_HOST = "192.168.29.5"
+          RMQ_HOST = "192.168.29.185"
 
         }
 
       config {
         // image = "curlimages/curl"
-        image = "192.168.29.5:5000/rounak316/dsad:6033fa965b22581da55edb70"
+        image = "192.168.29.185:5000/rounak316/dsad:6033fa965b22581da55edb70"
         
 
         // entrypoint = "/bin/sh"
-        // args =  [ "-v",   "http://192.168.29.5:5000"]
+        // args =  [ "-v",   "http://192.168.29.185:5000"]
         // args = [ "-c",  "ping" , "", "google.com"]
       }
     }
