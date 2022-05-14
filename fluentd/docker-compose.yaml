@@ -9,4 +9,4 @@ services:
       - "24224:24224/udp"
     volumes:
       - ./conf:/fluentd/etc
-      - /volumes/fluentd:/logs:Z
+      - /volumes/fluentd:/logs_new:Z
