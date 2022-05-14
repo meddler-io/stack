@@ -9,7 +9,7 @@ services:
       file: ./fluentd/docker-compose.yaml
       service: fluentd
     volumes:
-      - ./volumes/fluentd:/logs:Z
+      - ./volumes/fluentd:/logs:rw
     restart: always
 
   #TCP: 24224
