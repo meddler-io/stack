@@ -8,7 +8,7 @@ services:
     extends:
       file: ./fluentd/docker-compose.yaml
       service: fluentd
-    user: fluent
+    user: root
     volumes:
       - ./volumes/fluentd:/logs:rw
     restart: always
