@@ -2,7 +2,7 @@ version: "3"
 services:
   #TCP: 24224
   fluentd:
-    user: root
+    user: fluent
     image: fluent/fluentd
     ports:
       - "24224:24224"
