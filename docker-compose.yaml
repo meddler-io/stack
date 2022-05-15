@@ -42,8 +42,8 @@ services:
     extends:
       file: ./rabbitmq/docker-compose.yml
       service: rabbitmq
-    volumes:
-      - ./volumes/rmq:/bitnami:Z
+    # volumes:
+      # - ./volumes/rmq/:/bitnami/:rw
     restart: always
 
   registry:
