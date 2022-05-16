@@ -15,6 +15,6 @@ services:
       REGISTRY_STORAGE_S3_SECURE: "false"
       REGISTRY_STORAGE_S3_region: meddler
       REGISTRY_STORAGE_REDIRECT_DISABLE: "true"
-      REGISTRY_HTTP_SECRET: SUPERDUPERSECRET
+      # REGISTRY_HTTP_SECRET: SUPERDUPERSECRET
     volumes:
       - ./config.yml:/etc/docker/registry/config.yml
